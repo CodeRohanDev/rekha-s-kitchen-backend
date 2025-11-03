@@ -1,0 +1,12 @@
+node_modules/
+.env*
+serviceaccount.json
+logs/
+uploads/
+.DS_Store
+*.log
+dist/
+build/
+coverage/
+.nyc_output/
+temp/
