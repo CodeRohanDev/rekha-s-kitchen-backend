@@ -48,7 +48,7 @@ Authorization: Bearer <access_token>
         "max_discount": 100,
         "valid_from": "2025-10-01T00:00:00Z",
         "valid_until": "2025-12-31T23:59:59Z",
-        "usage_per_user": 1,
+        "usage_per_user": 1, 
         "first_order_only": true,
         "is_active": true,
         "applicable_outlets": [],

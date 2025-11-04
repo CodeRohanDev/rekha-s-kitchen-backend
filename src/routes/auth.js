@@ -34,64 +34,54 @@ const generalLimiter = rateLimit({
 });
 
 // Public routes
-router.post('/register', 
-  authLimiter,
+router.post('/register',
   validate(schemas.register),
   AuthController.register
 );
 
 router.post('/login',
-  authLimiter,
   validate(schemas.login),
   AuthController.login
 );
 
 router.post('/refresh-token',
-  generalLimiter,
   AuthController.refreshToken
 );
 
 // Mobile OTP Authentication
 router.post('/otp/send',
-  authLimiter,
   validate(schemas.sendOTP),
   AuthController.sendOTP
 );
 
 router.post('/otp/verify',
-  authLimiter,
   validate(schemas.verifyOTP),
   AuthController.verifyOTP
 );
 
 router.post('/otp/resend',
-  authLimiter,
   validate(schemas.resendOTP),
   AuthController.resendOTP
 );
 
 // Protected routes
 router.post('/logout',
-  generalLimiter,
   authenticate,
   AuthController.logout
 );
 
 router.get('/profile',
-  generalLimiter,
   authenticate,
   AuthController.getProfile
 );
 
 router.get('/me/outlets',
-  generalLimiter,
   authenticate,
   AuthController.getUserOutlets
 );
 
 // Admin only routes
 router.post('/staff',
-  generalLimiter,
   authenticate,
   authorize(['super_admin', 'outlet_admin']),
   validate(schemas.createStaff),
@@ -101,7 +91,6 @@ router.post('/staff',
 // Development only - Create super admin (remove in production)
 if (process.env.NODE_ENV === 'development') {
   router.post('/create-super-admin',
-    generalLimiter,
     validate(schemas.createSuperAdmin),
     AuthController.createSuperAdmin
   );
